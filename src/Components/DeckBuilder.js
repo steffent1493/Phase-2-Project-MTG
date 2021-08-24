@@ -4,7 +4,6 @@ import MtgCard from "./MtgCard";
 
 function DeckBuilder({ input, onChange, mtgCardsList, parentCallback }) {
 
-    const [mtgMyDeck, setMtgMyDeck] = useState([])
     const [deckCardNumber, setDeckCardNumber] = useState(0)
     const cardsWithImages = mtgCardsList.filter(card => card.imageUrl)
     const cardSet = new Set(cardsWithImages.map(card => card.name))
@@ -17,7 +16,6 @@ function DeckBuilder({ input, onChange, mtgCardsList, parentCallback }) {
     })
 
     const handleOnClick = async (card) => {
-        setMtgMyDeck((mtgMyDeck) => mtgMyDeck.concat(card.imageUrl))
         setDeckCardNumber((deckCardNumber) + 1)
         parentCallback((mtgMyDeck) => mtgMyDeck.concat(card.imageUrl))
     }
