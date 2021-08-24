@@ -1,5 +1,5 @@
 import React from "react";
-import mtglogo from "./images/mtglogo.png"
+
 function SearchBar({ input, onChange, cardsInDeck }) {
     return (
         <div className="searchbarimg">

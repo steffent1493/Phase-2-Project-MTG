@@ -14,25 +14,18 @@ function DeckBuilder({ input, onChange, mtgCardsList, parentCallback }) {
             cardSet.delete(card.name)
             filteredCards.push(card)
         }
-
     })
 
-    function handleOnClick(card) {
-        setMtgMyDeck(mtgMyDeck.concat(card.imageUrl))
-        setDeckCardNumber(deckCardNumber + 1)
-        parentCallback(mtgMyDeck)
+    const handleOnClick = async (card) => {
+        setMtgMyDeck((mtgMyDeck) => mtgMyDeck.concat(card.imageUrl))
+        setDeckCardNumber((deckCardNumber) + 1)
+        parentCallback((mtgMyDeck) => mtgMyDeck.concat(card.imageUrl))
     }
 
-    return (<div className="deckbuilder">
+    return (< div className="deckbuilder" >
         <SearchBar input={input} onChange={onChange} cardsInDeck={deckCardNumber} />
-        <div className="cardcontainer">
-            {filteredCards.map((card) => (
-                <MtgCard
-                    key={card.id}
-                    card={card}
-                    handleOnClick={handleOnClick}
-                />
-            ))}
+        <div className="cardcontainer"> {
+            filteredCards.map((card) => (<MtgCard key={card.id} card={card} handleOnClick={handleOnClick} />))}
         </div>
     </div>
     )

@@ -20,6 +20,7 @@ function App() {
         setMtgCardsList(data.cards)
       })
   }
+
   const updateInput = async (input) => {
     setInput(input);
     await fetchData(input);
@@ -27,11 +28,14 @@ function App() {
 
   useEffect(() => { fetchData("") }, []);
   
-  function parentCallback(mtgMyDeck) {
+  const parentCallback = (mtgMyDeck) => {
     setNewMtgMyDeck(mtgMyDeck)
+  };
+
+  const handleOnClickDeck = () => {
+    setNewMtgMyDeck([])
   }
 
-  
   return (
     <div >
       <NavBar />
@@ -40,7 +44,11 @@ function App() {
           {mtgCardsList && <DeckBuilder input={input} onChange={updateInput} mtgCardsList={mtgCardsList} parentCallback={parentCallback} />}
         </Route>
         <Route exact path="/MyDeck">
+          <div className="myDeckBanner">
+          <button className="myDeckButton"onClick={() => handleOnClickDeck()}>Delete Deck</button>
+          </div>
           {newMtgMyDeck.map(myDeckCard => (<div className="mydeck"><MyDeck
+            key={myDeckCard}
             myDeckCard={myDeckCard}
           />
           </div>))}
